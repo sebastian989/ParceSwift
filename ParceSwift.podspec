@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/sebastian989/ParceSwift.git", :tag => "0.0.1" }
     s.source_files = "ParseSwift", "ParceSwift/*.{swift}"
     s.frameworks   = 'UIKit'
-    s.ios.deployment_target = '9.0'
-    s.platform = :ios, '9.0'
-    s.requires_arc = true
+    s.ios.deployment_target = '7.0'
+    s.platform = :ios, '7.0'
+    s.requires_arc = false
  
 end
