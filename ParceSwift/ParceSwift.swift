@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension NSObject {
+public extension NSObject {
     
-    func fromDictionary(json: [String: AnyObject]) {
+    public func fromDictionary(json: [String: AnyObject]) {
 
         let propertyAndTypes = self.getPropertiesAndType()
         
