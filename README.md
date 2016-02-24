@@ -94,6 +94,62 @@ print(user.name!)
 print(user.address!.street!)
 ```
 
+
+### Create a dictionary from a model:
+
+If your model and sub models extends of NSObject:
+
+```
+class User: NSObject {
+    var name: String?
+    var age: NSNumber?
+    var height: NSNumber!
+    var isMan: Bool = false
+    var address: Address?
+    var anyDictionary: [String:Int]?
+    var arrayAnyTypes: [Int]?
+    var modelsArray: [Address]?
+}
+```
+
+```
+class Address: NSObject {
+    var street: String?
+    var avenue: Int?
+    
+    init(street: String, avenue: Int) {
+        super.init()
+        self.street = street
+        self.avenue = avenue
+    }
+}
+```
+
+And it's initialized:
+
+```
+let homeAddress = Address(street: "Columbus", avenue: 12)
+let workAddress = Address(street: "Sabaneta", avenue: 13)
+let marketAddress = Address(street: "Cupertino", avenue: 15)
+
+let user = User()
+user.name = "Brian"
+user.age = 26
+user.address = homeAddress
+user.height = 1.75
+user.isMan = true
+user.anyDictionary = ["key": 2]
+user.arrayAnyTypes = [1, 2, 3, 4, 5]
+user.modelsArray = [workAddress, marketAddress]
+```
+
+Create a dictionary from your model it's simply like:
+
+let myDictionary: [String: AnyObject] = user.toDictionary()
+
+
+
+
 ## Author
 
 [Sebastian Gomez Osorio](https://github.com/sebastian989),
