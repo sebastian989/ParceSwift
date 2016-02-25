@@ -12,9 +12,19 @@ class User: NSObject {
     var name: String?
     var age: NSNumber?
     var height: NSNumber!
-    var isMan: Bool = false
+    var isOld: Bool = false
+    var email: String?
+    var cellphone: String?
     var address: Address?
     var anyDictionary: [String:Int]?
     var arrayAnyTypes: [Int]?
     var modelsArray: [Address]?
+    
+    override func customKeysName() -> [String : String]? {
+        let customs = [
+            "email": "user_email",
+            "cellphone": "mobile_number"
+        ]
+        return customs
+    }
 }

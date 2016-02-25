@@ -22,9 +22,16 @@ public extension NSObject {
         
         let propertyAndTypes = self.getPropertiesAndType()
         
+        let customKeys: [String : String]? = self.customKeysName()
+        
         for (label, type) in propertyAndTypes {
+            var customKey = label
             
-            guard let propertyValue = json[label] else {
+            if let custom = customKeys?[label] {
+                customKey = custom
+            }
+            
+            guard let propertyValue = json[customKey] else {
                 continue
             }
             
@@ -158,6 +165,10 @@ public extension NSObject {
         let path = appName + "." + className
         let anyClass: AnyClass = NSClassFromString(path)!
         return anyClass as! NSObject.Type
+    }
+    
+    public func customKeysName() -> [String : String]? {
+        return nil
     }
     
 }
