@@ -27,6 +27,9 @@ class ViewController: UIViewController {
             "modelsArray": [["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]]
         ]
         
+        let jsonArray: [Address] = Address.fromJsonArray([["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]])
+        print("array of models: \(jsonArray)")
+        
         let user = User()
         user.fromDictionary(apiDictionary)
         

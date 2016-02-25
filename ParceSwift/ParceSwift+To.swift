@@ -36,19 +36,11 @@ public extension NSObject {
         
         let propertyAndTypes = self.getPropertiesAndType()
         
-        let customKeys: [String : String]? = self.customKeysName()
-        
         for (label, _) in propertyAndTypes {
-            var customKey = label
             
-            if let custom = customKeys?[label] {
-                customKey = custom
-            }
-            
-            guard let propertyValue = self.valueForKey(customKey) else {
+            guard let propertyValue = self.valueForKey(label) else {
                 continue
             }
-            
             
             if propertyValue is String
             {

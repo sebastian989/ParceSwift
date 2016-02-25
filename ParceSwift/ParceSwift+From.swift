@@ -107,4 +107,16 @@ public extension NSObject {
             }
         }
     }
+    
+    public class func fromJsonArray<T : NSObject>(array: [[String: AnyObject]]) -> [T] {
+        var arrayObjects = [T]()
+        
+        for item in array {
+            let object = T()
+            object.fromDictionary(item)
+            arrayObjects.append(object)
+        }
+        
+        return arrayObjects
+    }
 }
