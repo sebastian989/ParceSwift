@@ -94,6 +94,24 @@ print(user.name!)
 print(user.address!.street!)
 ```
 
+### Get a model from JSON String:
+
+The same process but you must use 'fromJSON' function.
+
+```
+do{
+    let jsonString = "{\"name\": \"Jose\",\"age\": 25,\"address\": {\"street\": \"Cupertino\",\"avenue\": 15},\"height\": 1.64,\"isMan\": true,\"anyDictionary\": {\"key\": 2},\"arrayAnyTypes\": [1, 2, 3, 4, 5],\"modelsArray\": [{\"street\": \"Medellín\",\"avenue\": 10}, {\"street\": \"Medellín\",\"avenue\": 11}]}"
+    let userJ = User()
+    try userJ.fromJSON(jsonString)
+
+    print("name: \(userJ.name!), address: Street \(userJ.address!.street!) Avenue \(userJ.address!.avenue!)")
+} catch {
+    print("The string isn't a valid JSON")
+}
+```
+
+Must use try catch blocks to do error handling.
+
 
 ### Create a dictionary from a model:
 
@@ -115,9 +133,9 @@ class User: NSObject {
 ```
 class Address: NSObject {
     var street: String?
-    var avenue: Int?
+    var avenue: NSNumber?
     
-    init(street: String, avenue: Int) {
+    init(street: String, avenue: NSNumber) {
         super.init()
         self.street = street
         self.avenue = avenue
@@ -145,10 +163,21 @@ user.modelsArray = [workAddress, marketAddress]
 
 Create a dictionary from your model it's simply like:
 
+```
 let myDictionary: [String: AnyObject] = user.toDictionary()
+```
 
+### Create a JSON String from a model:
 
-
+The same process but you must use 'fromJSON' function.
+```
+do {
+    let jsonString = try user.toJSON()
+    print("toJSON: " + jsonString)
+} catch {
+    print("The model can't be parsed to JSON format")
+}
+```
 
 ## Author
 

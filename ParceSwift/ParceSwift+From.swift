@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- NSObject extension to transform a Dictionary to and from object
+ NSObject extension to get a Dictionary or JSON String from object
  */
 public extension NSObject {
     
@@ -107,100 +107,4 @@ public extension NSObject {
             }
         }
     }
-    
-    /**
-     Transform the current NSObject to JSON.
-     
-     - Returns: JSON String with data.
-     - Throws: If an internal error occurs, upon throws contains an NSError object that describes the problem.
-     */
-    public func toJSON() throws -> String  {
-        let dictionary: [String: AnyObject] = toDictionary()
-        let data = try NSJSONSerialization.dataWithJSONObject(dictionary , options: NSJSONWritingOptions(rawValue: 0))
-        let jsonString = NSString(data: data, encoding: NSASCIIStringEncoding)
-        return jsonString as! String
-    }
-    
-    /**
-     Transforms the current NSObject to Dictionary.
-     
-     - returns: Dictionary with data.
-     */
-    public func toDictionary() -> [String: AnyObject] {
-        var dictionary = Dictionary<String, AnyObject>()
-        
-        let propertyAndTypes = self.getPropertiesAndType()
-        for (label, _) in propertyAndTypes {
-            
-            guard let propertyValue = self.valueForKey(label) else {
-                continue
-            }
-            
-            if propertyValue is String
-            {
-                dictionary[label] = propertyValue as! String
-            }
-                
-            else if propertyValue is NSNumber
-            {
-                dictionary[label] = propertyValue as! NSNumber
-            }
-                
-            else if propertyValue is Array<String>
-            {
-                dictionary[label] = propertyValue
-            }
-                
-            else if propertyValue is Array<AnyObject>
-            {
-                var array = Array<[String: AnyObject]>()
-                
-                for item in (propertyValue as! Array<AnyObject>) {
-                    array.append(item.toDictionary())
-                }
-                
-                dictionary[label] = array
-            }
-            // AnyObject
-            else
-            {
-                dictionary[label] = propertyValue.toDictionary()
-            }
-        }
-        return dictionary
-    }
-    
-    /**
-     Get a dictionary with label-value of properties of the current NSObject
-     
-     - returns: Dictionary with label-value of properties.
-     */
-    func getPropertiesAndType() -> [String : String] {
-        var propertiesAndType = [String: String]()
-        let aMirror = Mirror(reflecting: self)
-        
-        for case let (label?, value) in aMirror.children {
-            propertiesAndType[label] = "\(Mirror(reflecting: value).subjectType)".componentsSeparatedByString("<").last!.componentsSeparatedByString(">").first
-        }
-        
-        return propertiesAndType
-    }
-    
-    /**
-     Get type of a class from their class name.
-     
-     - parameter className: String with class name.
-     - returns: Class type ready to initializing.
-     */
-    func swiftClassFromString(className: String) -> NSObject.Type {
-        let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String
-        let path = appName + "." + className
-        let anyClass: AnyClass = NSClassFromString(path)!
-        return anyClass as! NSObject.Type
-    }
-    
-    public func customKeysName() -> [String : String]? {
-        return nil
-    }
-    
 }

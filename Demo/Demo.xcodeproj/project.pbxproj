@@ -16,7 +16,9 @@
 		1202C3A71C7CC70E005615F9 /* DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202C3A61C7CC70E005615F9 /* DemoUITests.swift */; };
 		1202C3B71C7CC756005615F9 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202C3B51C7CC756005615F9 /* Address.swift */; };
 		1202C3B81C7CC756005615F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1202C3B61C7CC756005615F9 /* User.swift */; };
-		9E1BEA781C7E81BC009BD700 /* ParceSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1BEA771C7E81BC009BD700 /* ParceSwift.swift */; };
+		9E1BEA781C7E81BC009BD700 /* ParceSwift+From.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1BEA771C7E81BC009BD700 /* ParceSwift+From.swift */; };
+		FABDB5DE1C7F57AA0055316A /* ParceSwift+To.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDB5DD1C7F57AA0055316A /* ParceSwift+To.swift */; };
+		FABDB5E01C7F57C00055316A /* ParceSwift+Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDB5DF1C7F57C00055316A /* ParceSwift+Commons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +54,9 @@
 		1202C3A81C7CC70E005615F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1202C3B51C7CC756005615F9 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		1202C3B61C7CC756005615F9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		9E1BEA771C7E81BC009BD700 /* ParceSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParceSwift.swift; path = ../../ParceSwift/ParceSwift.swift; sourceTree = "<group>"; };
+		9E1BEA771C7E81BC009BD700 /* ParceSwift+From.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ParceSwift+From.swift"; path = "../../ParceSwift/ParceSwift+From.swift"; sourceTree = "<group>"; };
+		FABDB5DD1C7F57AA0055316A /* ParceSwift+To.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ParceSwift+To.swift"; path = "../../ParceSwift/ParceSwift+To.swift"; sourceTree = "<group>"; };
+		FABDB5DF1C7F57C00055316A /* ParceSwift+Commons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ParceSwift+Commons.swift"; path = "../../ParceSwift/ParceSwift+Commons.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +149,9 @@
 		1202C3B91C7CC75C005615F9 /* Parse */ = {
 			isa = PBXGroup;
 			children = (
-				9E1BEA771C7E81BC009BD700 /* ParceSwift.swift */,
+				9E1BEA771C7E81BC009BD700 /* ParceSwift+From.swift */,
+				FABDB5DD1C7F57AA0055316A /* ParceSwift+To.swift */,
+				FABDB5DF1C7F57C00055316A /* ParceSwift+Commons.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -284,7 +290,9 @@
 				1202C3B71C7CC756005615F9 /* Address.swift in Sources */,
 				1202C3891C7CC70E005615F9 /* ViewController.swift in Sources */,
 				1202C3871C7CC70E005615F9 /* AppDelegate.swift in Sources */,
-				9E1BEA781C7E81BC009BD700 /* ParceSwift.swift in Sources */,
+				FABDB5DE1C7F57AA0055316A /* ParceSwift+To.swift in Sources */,
+				FABDB5E01C7F57C00055316A /* ParceSwift+Commons.swift in Sources */,
+				9E1BEA781C7E81BC009BD700 /* ParceSwift+From.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

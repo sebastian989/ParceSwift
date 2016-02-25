@@ -31,6 +31,24 @@ class ViewController: UIViewController {
         user.fromDictionary(apiDictionary)
         
         print("name: \(user.name!), address: Street \(user.address!.street!) Avenue \(user.address!.avenue!)")
+        
+        // Model to JSON String
+        do {
+            let jsonString = try user.toJSON()
+            print("toJSON: " + jsonString)
+        } catch {
+            print("The model can't be parsed to JSON format")
+        }
+        
+        // JSON String to Model
+        do{
+            let jsonString = "{\"name\": \"Jose\",\"age\": 25,\"address\": {\"street\": \"Cupertino\",\"avenue\": 15},\"height\": 1.64,\"isMan\": true,\"anyDictionary\": {\"key\": 2},\"arrayAnyTypes\": [1, 2, 3, 4, 5],\"modelsArray\": [{\"street\": \"Medellín\",\"avenue\": 10}, {\"street\": \"Medellín\",\"avenue\": 11}]}"
+            let userJ = User()
+            try userJ.fromJSON(jsonString)
+        } catch {
+            print("The string isn't a valid JSON")
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
