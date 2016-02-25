@@ -14,6 +14,25 @@ import Foundation
 public extension NSObject {
     
     /**
+     Fills the current NSObject with JSON data.
+     
+     - Parameter json: String with JSON data.
+     
+     - Throws: If an internal error occurs, upon throws contains an NSError object that describes the problem.
+     */
+    public func fromJSON(json: String) throws {
+        var dictionary: [String: AnyObject]?
+        if let data = json.dataUsingEncoding(NSUTF8StringEncoding) {
+            do {
+                dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
+                fromDictionary(dictionary!)
+            } catch let error as NSError {
+                throw error
+            }
+        }
+    }
+    
+    /**
      Fills the current NSObject with a Dictionary data.
      
      - parameter json: Dictionary with data.
@@ -87,6 +106,19 @@ public extension NSObject {
                 self.setValue(modelObject, forKey: label)
             }
         }
+    }
+    
+    /**
+     Transform the current NSObject to JSON.
+     
+     - Returns: JSON String with data.
+     - Throws: If an internal error occurs, upon throws contains an NSError object that describes the problem.
+     */
+    public func toJSON() throws -> String  {
+        let dictionary: [String: AnyObject] = toDictionary()
+        let data = try NSJSONSerialization.dataWithJSONObject(dictionary , options: NSJSONWritingOptions(rawValue: 0))
+        let jsonString = NSString(data: data, encoding: NSASCIIStringEncoding)
+        return jsonString as! String
     }
     
     /**
