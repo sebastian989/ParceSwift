@@ -16,7 +16,8 @@ Choose ParceSwift for your next project, or migrate over your existing projects,
 * Copying all the files into your project
 
 ### CocoaPods:
-ContactsManager is available through [CocoaPods](http://cocoapods.org). To install
+
+ParceSwift is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod 'ParceSwift'
@@ -35,6 +36,7 @@ import ParceSwift
 
 #### Important things
 
+* All your models that you want to Map must inherit of NSObject.
 * If you have porperties of type Int, Float or Double then you must change these types to NSNumber.
 * If you have properties of type Bool, you must initialize these in their declaration.
 
@@ -118,7 +120,7 @@ print(user.address!.street!)
 
 ### Mapping JSONArray to models Array
 
-Lets supose that you have an array of dictionaries like this:
+Let`s supose that you have an array of dictionaries like this:
 ```
 let array = [["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]]
 ```
