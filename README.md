@@ -116,9 +116,23 @@ print(user.name!)
 print(user.address!.street!)
 ```
 
+### Mapping JSONArray to models Array
+
+Lets supose that you have an array of dictionaries like this:
+```
+let array = [["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]]
+```
+
+You can get a models array in a simple way just calling 'fromJsonArray' function and passing the array in their parameters:
+```
+let modelsArray: [Address] = Address.fromJsonArray(array)
+```
+
+To use 'fromJsonArray' function you don't need to instance the class, just call it from your model class.
+
 ### Overriding Key Name for Attribute
 
-If your JSON have any key that doesn't match with the model property name, you can override the function 'customKeysName' in the model to map this key to the attribute. You havo to return a dictionary with the model property name and the name that will receive in the json:
+If your JSON have any key that doesn't match with the model property name, you can override the function 'customKeysName' in the model to map this key to the attribute. You have to return a dictionary with the model property name and the name that will receive in the json:
 ```
 override func customKeysName() -> [String : String]? {
     let customs = [
