@@ -2,7 +2,7 @@
 
 ## Usage
 
-ParceSwift is a delightful library for iOS. It's built with high quality standards to parse their dictionaries modelsquickly and safely.
+ParceSwift is a delightful library for iOS specifically Swift. It's built with high quality standards to parse their dictionaries models quickly and safely.
 
 Choose ParceSwift for your next project, or migrate over your existing projects, we guarantee you'll be happy you did!
 
@@ -28,6 +28,16 @@ it, simply add the following line to your Podfile:
 
 ## Usage
 
+First you need to import ParceSwift in AppDelegate or where you want:
+```
+import ParceSwift
+```
+
+#### Important things
+
+* If you have porperties of type Int, Float or Double then you must change these types to NSNumber.
+* If you have properties of type Bool, you must initialize these in their declaration.
+
 ### Get a model from dictionary:
 
 ParceSwift is an extension of NSObject, all you need to do is create a new object and start to transform a dictionary to any classes.
@@ -37,12 +47,14 @@ Let's assume that you have some JSON like that:
 {
     "name": "Brian",
     "age": 26,
+    "height": 1.75,
+    "isOld": true,
+    "user_email": "user@email.com",
+    "mobile_number": "567-876-2343",
     "address": {
         "street": "Columbus",
         "avenue": 12
     },
-    "height": 1.75,
-    "isMan": true,
     "anyDictionary": {
         "key": 2
     },
@@ -63,11 +75,21 @@ class User: NSObject {
     var name: String?
     var age: NSNumber?
     var height: NSNumber!
-    var isMan: Bool = false
+    var isOld: Bool = false
+    var email: String?
+    var cellphone: String?
     var address: Address?
     var anyDictionary: [String:Int]?
     var arrayAnyTypes: [Int]?
     var modelsArray: [Address]?
+}
+```
+
+As you can see, this model has a property called address, this property is of type Address which is a class like this:
+```
+class Address : NSObject {
+    var street: String?
+    var avenue: NSNumber?
 }
 ```
 
@@ -82,7 +104,7 @@ do{
 }
 ```
 
-Next you have to create an object and call 'fromDictionary' function:
+Next you have to create an object and call 'fromDictionary' function passing the dictionary in the parameters:
 ```
 let user = User()
 user.fromDictionary(dataDictionary)
@@ -92,6 +114,19 @@ Then you can use the model properties and functions:
 ```
 print(user.name!)
 print(user.address!.street!)
+```
+
+### Overriding Key Name for Attribute
+
+If your JSON have any key that doesn't match with the model property name, you can override the function 'customKeysName' in the model to map this key to the attribute. You havo to return a dictionary with the model property name and the name that will receive in the json:
+```
+override func customKeysName() -> [String : String]? {
+    let customs = [
+            "email": "user_email",
+            "cellphone": "mobile_number"
+    ]
+    return customs
+}
 ```
 
 ### Get a model from JSON String:
@@ -181,7 +216,7 @@ do {
 
 ## Author
 
-[Sebastian Gomez Osorio](https://github.com/sebastian989),
+[Sebastián Gómez Osorio](https://github.com/sebastian989),
 [Leonardo Armero Barbosa](https://github.com/xrax)
 
 ## License
