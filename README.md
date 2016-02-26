@@ -2,7 +2,7 @@
 
 ## Usage
 
-ParceSwift is a delightful library for iOS specifically Swift. It's built with high quality standards to parse their dictionaries models quickly and safely.
+ParceSwift is a delightful library for iOS specifically Swift. It's built with high quality standards to parse dictionaries to models quickly and safely.
 
 Choose ParceSwift for your next project, or migrate over your existing projects, we guarantee you'll be happy you did!
 
@@ -37,7 +37,7 @@ import ParceSwift
 #### Important things
 
 * All your models that you want to Map must inherit of NSObject.
-* If you have porperties of type Int, Float or Double then you must change these types to NSNumber.
+* If you have prpperties of type Int, Float or Double then you must change these types to NSNumber.
 * If you have properties of type Bool, you must initialize these in their declaration.
 
 ### Get a model from dictionary:
