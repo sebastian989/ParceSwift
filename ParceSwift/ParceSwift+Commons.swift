@@ -37,7 +37,10 @@ public extension NSObject {
      */
     func swiftClassFromString(className: String) -> NSObject.Type {
         let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String
-        let path = appName + "." + className
+        var path = appName + "." + className
+        if path.containsString(" ") {
+            path = path.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        }
         let anyClass: AnyClass = NSClassFromString(path)!
         return anyClass as! NSObject.Type
     }
