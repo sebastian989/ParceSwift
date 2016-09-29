@@ -23,7 +23,7 @@ public extension NSObject {
         let aMirror = Mirror(reflecting: self)
         
         for case let (label?, value) in aMirror.children {
-            propertiesAndType[label] = "\(Mirror(reflecting: value).subjectType)".componentsSeparatedByString("<").last!.componentsSeparatedByString(">").first
+            propertiesAndType[label] = "\(Mirror(reflecting: value).subjectType)".components(separatedBy: "<").last!.components(separatedBy: ">").first
         }
         
         return propertiesAndType
@@ -35,11 +35,11 @@ public extension NSObject {
      - parameter className: String with class name.
      - returns: Class type ready to initializing.
      */
-    func swiftClassFromString(className: String) -> NSObject.Type {
-        let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String
+    func swiftClassFromString(_ className: String) -> NSObject.Type {
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
         var path = appName + "." + className
-        if path.containsString(" ") {
-            path = path.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        if path.contains(" ") {
+            path = path.replacingOccurrences(of: " ", with: "_", options: NSString.CompareOptions.literal, range: nil)
         }
         let anyClass: AnyClass = NSClassFromString(path)!
         return anyClass as! NSObject.Type

@@ -19,11 +19,14 @@ public extension NSObject {
      - Returns: JSON String with data.
      - Throws: If an internal error occurs, upon throws contains an NSError object that describes the problem.
      */
-    public func toJSON() throws -> String  {
+    public func toJSON() throws -> String? {
         let dictionary: [String: AnyObject] = toDictionary()
-        let data = try NSJSONSerialization.dataWithJSONObject(dictionary , options: NSJSONWritingOptions(rawValue: 0))
-        let jsonString = NSString(data: data, encoding: NSASCIIStringEncoding)
-        return jsonString as! String
+//        if !JSONSerialization.isValidJSONObject(dictionary) {
+//            return nil
+//        }
+        let data = try JSONSerialization.data(withJSONObject: dictionary , options: [])
+        let jsonString = NSString(data: data, encoding: String.Encoding.ascii.rawValue)
+        return jsonString as? String
     }
     
     /**
@@ -38,13 +41,13 @@ public extension NSObject {
         
         for (label, _) in propertyAndTypes {
             
-            guard let propertyValue = self.valueForKey(label) else {
+            guard let propertyValue = self.value(forKey: label) else {
                 continue
             }
             
             if propertyValue is String
             {
-                dictionary[label] = propertyValue as! String
+                dictionary[label] = propertyValue as! String as AnyObject?
             }
                 
             else if propertyValue is NSNumber
@@ -54,7 +57,7 @@ public extension NSObject {
                 
             else if propertyValue is Array<String>
             {
-                dictionary[label] = propertyValue
+                dictionary[label] = propertyValue as AnyObject?
             }
                 
             else if propertyValue is Array<AnyObject>
@@ -65,12 +68,12 @@ public extension NSObject {
                     array.append(item.toDictionary())
                 }
                 
-                dictionary[label] = array
+                dictionary[label] = array as AnyObject?
             }
                 // AnyObject
             else
             {
-                dictionary[label] = propertyValue.toDictionary()
+                dictionary[label] = (propertyValue as AnyObject).toDictionary() as AnyObject
             }
         }
         return dictionary

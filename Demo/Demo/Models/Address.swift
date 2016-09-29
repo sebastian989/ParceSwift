@@ -9,6 +9,6 @@
 import Foundation
 
 class Address : NSObject {
-    var street: String?
-    var avenue: NSNumber?
+    var street: String!
+    var avenue: NSNumber!
 }

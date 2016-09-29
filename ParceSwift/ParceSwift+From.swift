@@ -20,11 +20,11 @@ public extension NSObject {
      
      - Throws: If an internal error occurs, upon throws contains an NSError object that describes the problem.
      */
-    public func fromJSON(json: String) throws {
+    public func fromJSON(_ json: String) throws {
         var dictionary: [String: AnyObject]?
-        if let data = json.dataUsingEncoding(NSUTF8StringEncoding) {
+        if let data = json.data(using: String.Encoding.utf8) {
             do {
-                dictionary = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
+                dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
                 fromDictionary(dictionary!)
             } catch let error as NSError {
                 throw error
@@ -37,7 +37,7 @@ public extension NSObject {
      
      - parameter json: Dictionary with data.
      */
-    public func fromDictionary(json: [String: AnyObject]) {
+    public func fromDictionary(_ json: [String: AnyObject]) {
         
         let propertyAndTypes = self.getPropertiesAndType()
         
@@ -61,7 +61,7 @@ public extension NSObject {
             
             if let intValue = propertyValue as? NSNumber {
                 if type == "String" {
-                    self.setValue(String(intValue), forKey: label)
+                    self.setValue(String(describing: intValue), forKey: label)
                 } else {
                     self.setValue(intValue, forKey: label)
                 }
@@ -108,7 +108,7 @@ public extension NSObject {
         }
     }
     
-    public class func fromJsonArray<T : NSObject>(array: [[String: AnyObject]]) -> [T] {
+    public class func fromJsonArray<T : NSObject>(_ array: [[String: AnyObject]]) -> [T] {
         var arrayObjects = [T]()
         
         for item in array {

@@ -14,31 +14,31 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Api response Mock
-        let apiDictionary = [
-            "name": "Brian",
-            "age" : 80,
-            "user_email": "user@email.com",
-            "address": ["street": "Columbus", "avenue":12],
-            "height": 1.75,
-            "isOld": true,
-            "mobile_number": "567-876-2343",
-            "anyDictionary": ["key":2],
-            "arrayAnyTypes": [1,2,3,4,5],
-            "modelsArray": [["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]]
+        let apiDictionary: [String : AnyObject] = [
+            "name": "Brian" as AnyObject,
+            "age" : 80 as AnyObject,
+            "user_email": "user@email.com" as AnyObject,
+            "address": ["street": "Columbus", "avenue":12] as AnyObject,
+            "height": 1.75 as AnyObject,
+            "isOld": true as AnyObject,
+            "mobile_number": "567-876-2343" as AnyObject,
+            "anyDictionary": ["key":2] as AnyObject,
+            "arrayAnyTypes": [1,2,3,4,5] as AnyObject,
+            "modelsArray": [["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]] as AnyObject
         ]
         
-        let jsonArray: [Address] = Address.fromJsonArray([["street":"sabaneta","avenue":12], ["street":"sabaneta","avenue":13]])
+        let jsonArray: [Address] = Address.fromJsonArray([["street":"sabaneta" as AnyObject,"avenue":12 as AnyObject], ["street":"sabaneta" as AnyObject,"avenue":13 as AnyObject]])
         print("array of models: \(jsonArray)")
         
         let user = User()
-        user.fromDictionary(apiDictionary)
+        user.fromDictionary(apiDictionary as [String : AnyObject])
         
         print("name: \(user.name!), address: Street \(user.address!.street!) Avenue \(user.address!.avenue!)")
         
         // Model to JSON String
         do {
             let jsonString = try user.toJSON()
-            print("toJSON: " + jsonString)
+            print("toJSON: " + jsonString!)
         } catch {
             print("The model can't be parsed to JSON format")
         }
@@ -51,7 +51,6 @@ class ViewController: UIViewController {
         } catch {
             print("The string isn't a valid JSON")
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
